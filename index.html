@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FitFusion AI</title>
+
+<!-- Bootstrap -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Google Font -->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- =========================
+     WELCOME / PROFILE SCREEN
+========================= -->
+
+<div id="welcomeScreen">
+
+    <div class="welcome-card">
+
+        <h1>💚 FitFusion AI</h1>
+
+        <p class="welcome-text">
+            Welcome! Let's set up your health profile.
+        </p>
+
+        <input
+            id="welcomeName"
+            class="form-control mb-3"
+            placeholder="Full Name">
+
+        <input
+            id="welcomeAge"
+            class="form-control mb-3"
+            type="number"
+            placeholder="Age">
+
+        <input
+            id="welcomeHeight"
+            class="form-control mb-3"
+            type="number"
+            placeholder="Height (cm)">
+
+        <input
+            id="welcomeWeight"
+            class="form-control mb-3"
+            type="number"
+            placeholder="Weight (kg)">
+
+        <select
+    id="welcomeGender"
+    class="form-select mb-3">
+
+    <option value="">Select Gender</option>
+
+    <option>Male</option>
+
+    <option>Female</option>
+
+</select>
+
+        <select
+            id="welcomeGoal"
+            class="form-select mb-3">
+
+            <option>Lose Weight</option>
+            <option>Maintain Weight</option>
+            <option>Gain Muscle</option>
+
+        </select>
+
+        <select
+            id="welcomeDiet"
+            class="form-select mb-4">
+
+            <option>Vegetarian</option>
+            <option>Non-Vegetarian</option>
+            <option>Vegan</option>
+
+        </select>
+
+        <button
+            id="continueBtn"
+            class="btn btn-success w-100">
+
+            Continue
+
+        </button>
+
+    </div>
+
+</div>
+
+<div id="dashboardPage">
+
+<div id="root"></div>
+
+
+<!-- Overlay -->
+
+<div class="overlay"></div>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="profile">
+
+<i class="bi bi-person-circle"></i>
+
+<h3>FitFusion AI</h3>
+
+<p>Your Wellness Companion</p>
+
+</div>
+
+<ul>
+
+<li class="sidebar-item active" data-section="dashboard">
+
+<i class="bi bi-house"></i>
+
+Dashboard
+
+</li>
+
+<li class="sidebar-item" data-section="ai">
+
+<i class="bi bi-robot"></i>
+
+AI Assistant
+
+</li>
+
+<li class="sidebar-item" data-section="profile">
+
+<i class="bi bi-person-vcard"></i>
+
+Health Profile
+
+</li>
+
+<li class="sidebar-item" data-section="tools">
+
+<i class="bi bi-heart-pulse"></i>
+
+Health Tools
+
+</li>
+
+<li class="sidebar-item" data-section="diet">
+
+<i class="bi bi-egg-fried"></i>
+
+Diet Planner
+
+</li>
+
+<li class="sidebar-item" data-section="workout">
+
+<i class="bi bi-activity"></i>
+
+Workout Planner
+
+</li>
+
+<li class="sidebar-item" data-section="progress">
+
+<i class="bi bi-graph-up"></i>
+
+Progress
+
+</li>
+
+<li class="sidebar-item" data-section="settings">
+
+<i class="bi bi-gear"></i>
+
+Settings
+
+</li>
+
+<li class="sidebar-item" data-section="about">
+
+<i class="bi bi-info-circle"></i>
+
+About
+
+</li>
+
+</ul>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<button id="menuBtn">
+
+<i class="bi bi-list"></i>
+
+</button>
+
+<div class="title">
+
+💚 FitFusion AI
+
+</div>
+
+<button
+    id="profileBtn"
+    class="btn">
+
+    <i class="bi bi-person-circle"></i>
+
+</button>
+
+</div>
+
+<!-- Dashboard -->
+
+<div class="container py-4">
+
+<h2 id="greeting"></h2>
+
+<p id="todayDate" class="subtitle">
+
+Welcome back to FitFusion AI
+
+</p>
+
+<!-- =========================
+     DASHBOARD SECTION
+========================= -->
+<div id="dashboardSection" class="content-section">
+    <!-- Health Score -->
+    <div class="health-score">
+        <div class="score-circle">
+            <span id="healthScore">0%</span>
+        </div>
+        <div class="score-info">
+            <h3>Health Score</h3>
+            <p id="healthStatus">Calculating...</p>
+        </div>
+    </div>
+
+    <!-- Health Snapshot -->
+    <div class="section-title">❤️ Health Snapshot</div>
+    <div class="cards">
+        <div class="card-box clickable" id="openBMI">
+            <h4>BMI</h4>
+            <h2 id="dashboardBMI">--</h2>
+            <p>Healthy</p>
+        </div>
+        <div class="card-box clickable" id="openCalories">
+            <h4>🔥 Calories</h4>
+            <h2 id="dashboardCalories">--</h2>
+            <p>Daily Goal</p>
+        </div>
+        <div class="card-box clickable" id="openWater">
+            <h4>💧 Water</h4>
+            <h2 id="dashboardWater">0 L</h2>
+            <p>Today's Intake</p>
+        </div>
+    </div>
+
+    <!-- Today's Tip -->
+    <div class="tip">
+        <h5>💡 Today's Tip</h5>
+        <p>Drink another glass of water today.</p>
+    </div>
+
+    <!-- AI Insights -->
+    <div class="section-title mt-5">🤖 AI Insights</div>
+    <div class="card-box">
+        <ul id="aiInsights">
+            <li>Loading...</li>
+        </ul>
+    </div>
+
+    <!-- Daily Goals -->
+    <div class="section-title mt-5">🎯 Today's Goals</div>
+    <div class="card-box">
+        <div id="dailyGoals">
+            <p>⬜ Calculate BMI</p>
+            <p>⬜ Calculate Calories</p>
+            <p>⬜ Drink 2L Water</p>
+            <p>⬜ Save Profile</p>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+     AI ASSISTANT SECTION
+========================= -->
+<div id="aiSection" class="content-section" style="display:none;">
+    <div class="section-title">🤖 FitFusion AI Assistant</div>
+    <div class="ai-card">
+        <h4>Hello 👋</h4>
+        <p>How can I help you today?</p>
+        <div class="quick-prompts">
+            <button class="prompt">🥗 Generate Diet Plan</button>
+            <button class="prompt">🏋 Workout Plan</button>
+            <button class="prompt">🍎 Healthy Recipes</button>
+            <button class="prompt">💧 Water Advice</button>
+        </div>
+        <div class="mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-success">🟢 AI Ready</span>
+                <button id="clearChat" class="btn btn-sm btn-outline-danger">Clear Chat</button>
+            </div>
+            <div id="chatResponse" class="response-box chat-area">
+                <div class="ai-message">
+                    <b>🤖 FitFusion AI</b><br>
+                    Hello! How may I help you today?
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <textarea id="chatInput" class="form-control" rows="4" placeholder="Ask FitFusion AI..."></textarea>
+            <button id="sendMessage" class="btn btn-success w-100 mt-3">Send</button>
+        </div>
+        <div class="mt-4">
+            <h6>🕒 Recent Conversations</h6>
+            <ul id="historyList">
+                <li>No conversations yet.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+     HEALTH PROFILE SECTION
+========================= -->
+<div id="profileSection" class="content-section" style="display:none;">
+    <div class="section-title">👤 Health Profile</div>
+    <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm">
+        <h4 class="mb-4 text-success">Update Profile Settings</h4>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label font-weight-bold">Full Name</label>
+                <input id="modalName" class="form-control" placeholder="Full Name">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Age</label>
+                <input id="modalAge" class="form-control" type="number" placeholder="Age">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Gender</label>
+                <select id="modalGender" class="form-select">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Height (cm)</label>
+                <input id="modalHeight" class="form-control" type="number" placeholder="Height (cm)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Weight (kg)</label>
+                <input id="modalWeight" class="form-control" type="number" placeholder="Weight (kg)">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Fitness Goal</label>
+                <select id="modalGoal" class="form-select">
+                    <option>Lose Weight</option>
+                    <option>Maintain Weight</option>
+                    <option>Gain Muscle</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-4">
+            <label class="form-label">Dietary Preference</label>
+            <select id="modalDiet" class="form-select">
+                <option>Vegetarian</option>
+                <option>Non-Vegetarian</option>
+                <option>Vegan</option>
+            </select>
+        </div>
+        <button id="updateProfile" class="btn btn-success w-100 py-2">Save Changes</button>
+    </div>
+</div>
+
+<!-- =========================
+     HEALTH TOOLS SECTION
+========================= -->
+<div id="healthToolsSection" class="content-section" style="display:none;">
+    <div class="section-title">📊 Health Tools & Calculators</div>
+    <div class="row g-4">
+        <!-- BMI Calculator Card -->
+        <div class="col-lg-6">
+            <div class="card-box h-100 p-4 bg-white rounded-4 border-0 shadow-sm">
+                <h4 class="mb-3 text-success">📏 BMI Calculator</h4>
+                <div class="mb-3">
+                    <label class="form-label">Height (cm)</label>
+                    <input id="height" class="form-control" placeholder="Height (cm)">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Weight (kg)</label>
+                    <input id="weight" class="form-control" placeholder="Weight (kg)">
+                </div>
+                <button class="btn btn-success w-100" id="calculateBMI">Calculate BMI</button>
+                <div id="bmiResult" class="mt-4"></div>
+            </div>
+        </div>
+        
+        <!-- Calorie Calculator Card -->
+        <div class="col-lg-6">
+            <div class="card-box h-100 p-4 bg-white rounded-4 border-0 shadow-sm">
+                <h4 class="mb-3 text-success">🔥 Calorie Calculator</h4>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label class="form-label">Age</label>
+                        <input id="calAge" class="form-control" placeholder="Age">
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label class="form-label">Gender</label>
+                        <select id="calGender" class="form-select">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <label class="form-label">Height (cm)</label>
+                        <input id="calHeight" class="form-control" placeholder="Height (cm)">
+                    </div>
+                    <div class="col-6 mb-3">
+                        <label class="form-label">Weight (kg)</label>
+                        <input id="calWeight" class="form-control" placeholder="Weight (kg)">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Activity Level</label>
+                    <select id="activity" class="form-select">
+                        <option value="1.2">Sedentary</option>
+                        <option value="1.375">Light Exercise</option>
+                        <option value="1.55">Moderate Exercise</option>
+                        <option value="1.725">Heavy Exercise</option>
+                    </select>
+                </div>
+                <button id="calculateCalories" class="btn btn-success w-100">Calculate</button>
+                <div id="calorieResult" class="mt-3"></div>
+            </div>
+        </div>
+
+        <!-- Water Tracker Card -->
+        <div class="col-12">
+            <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm">
+                <h4 class="mb-3 text-success">💧 Water Tracker</h4>
+                <div class="row align-items-center">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <label class="form-label">Your Weight (kg)</label>
+                        <div class="input-group">
+                            <input id="waterWeight" class="form-control" placeholder="Weight (kg)">
+                            <button class="btn btn-success" id="waterGoal">Calculate Goal</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h5 class="text-muted">Today's Intake</h5>
+                        <h2 id="waterDisplay" class="text-primary font-weight-bold my-2">0 L</h2>
+                        <button class="btn btn-primary px-4 py-2" id="addWater">+250 ml</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+     DIET PLANNER SECTION
+========================= -->
+<div id="dietPlannerSection" class="content-section" style="display:none;">
+    <div class="section-title">🥗 Smart Diet Planner</div>
+    <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm">
+        <h4 class="mb-3 text-success">Generate Personalized Diet Plan</h4>
+        <div class="mb-3">
+            <label class="form-label">Your Fitness Goal</label>
+            <select id="dietGoal" class="form-select">
+                <option>Lose Weight</option>
+                <option>Maintain Weight</option>
+                <option>Gain Muscle</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Diet Type</label>
+            <select id="dietType" class="form-select">
+                <option>Vegetarian</option>
+                <option>Non-Vegetarian</option>
+                <option>Vegan</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Number of Meals</label>
+            <select id="mealCount" class="form-select">
+                <option>3 Meals</option>
+                <option>4 Meals</option>
+                <option>5 Meals</option>
+            </select>
+        </div>
+        <button id="generateDiet" class="btn btn-success w-100">Generate Plan</button>
+        <hr>
+        <div id="dietResult" class="mt-4"></div>
+    </div>
+</div>
+
+<!-- =========================
+     WORKOUT PLANNER SECTION
+========================= -->
+<div id="workoutPlannerSection" class="content-section" style="display:none;">
+    <div class="section-title">🏋 Smart Workout Planner</div>
+    <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm">
+        <h4 class="mb-3 text-success">Generate Personalized Workout Plan</h4>
+        <div class="mb-3">
+            <label class="form-label">Your Goal</label>
+            <select id="workoutGoal" class="form-select">
+                <option>Lose Weight</option>
+                <option>Maintain Fitness</option>
+                <option>Gain Muscle</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Experience Level</label>
+            <select id="workoutLevel" class="form-select">
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+            </select>
+        </div>
+        <button id="generateWorkout" class="btn btn-success w-100">Generate Workout</button>
+        <hr>
+        <div id="workoutResult" class="mt-4"></div>
+    </div>
+</div>
+
+<!-- =========================
+     PROGRESS SECTION
+========================= -->
+<div id="progressSection" class="content-section" style="display:none;">
+    <div class="section-title">📈 Progress & Achievements</div>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm h-100">
+                <h4 class="mb-3">Weekly Goals Progress</h4>
+                <div class="progress" style="height:18px;">
+                    <div id="weeklyProgress" class="progress-bar bg-success" style="width:0%;"></div>
+                </div>
+                <p id="weeklyText" class="mt-3">0 / 4 Goals Completed</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm h-100">
+                <h4 class="mb-3">Badges Unlocked</h4>
+                <div class="cards d-flex gap-3">
+                    <div class="card-box badge-card text-center p-3 border rounded-3 bg-light flex-fill">
+                        <div style="font-size: 2rem;">💧</div>
+                        <h6 class="mt-2 mb-0">Hydration Hero</h6>
+                    </div>
+                    <div class="card-box badge-card text-center p-3 border rounded-3 bg-light flex-fill">
+                        <div style="font-size: 2rem;">❤️</div>
+                        <h6 class="mt-2 mb-0">Healthy BMI</h6>
+                    </div>
+                    <div class="card-box badge-card text-center p-3 border rounded-3 bg-light flex-fill">
+                        <div style="font-size: 2rem;">🔥</div>
+                        <h6 class="mt-2 mb-0">Calorie Master</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+     SETTINGS SECTION
+========================= -->
+<div id="settingsSection" class="content-section" style="display:none;">
+    <div class="section-title">⚙️ Settings</div>
+    <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm">
+        <h4 class="mb-3 text-success">Application Preferences</h4>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h6 class="mb-0">Clear Local Storage</h6>
+                <small class="text-muted">Reset all your profile information and logs</small>
+            </div>
+            <button id="resetDataBtn" class="btn btn-danger">Reset All Data</button>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+     ABOUT SECTION
+========================= -->
+<div id="aboutSection" class="content-section" style="display:none;">
+    <div class="section-title">ℹ️ About FitFusion AI</div>
+    <div class="card-box p-4 bg-white rounded-4 border-0 shadow-sm">
+        <h4 class="mb-3 text-success">FitFusion AI v1.0.0</h4>
+        <p>FitFusion AI is your ultimate wellness and health companion. Combining modern AI technology with physical tracking calculations, it provides customized health scores, calorie budgeting, diet planning, and workout scheduling.</p>
+        <p class="text-muted">Powered by IBM Cloud Watson Orchestrate capabilities and custom API integrations.</p>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+<!-- Modals removed - content is now inline -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+  window.wxOConfiguration = {
+    orchestrationID: "e5ce4a2c99f84a48960767bd3c2aacd6_c88e5d37-3b49-4d51-9180-0bbeaaccd1b6",
+    hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+    rootElementID: "root",
+    deploymentPlatform: "ibmcloud",
+    crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/e5ce4a2c99f84a48960767bd3c2aacd6:c88e5d37-3b49-4d51-9180-0bbeaaccd1b6::",
+    chatOptions: {
+        agentId: "a4e53880-a8cc-4dd4-a66a-9ebb4765fc92", 
+        agentEnvironmentId: "e1e4ebdd-6718-4f94-8076-914b2584949e",
+    }
+  };
+  setTimeout(function () {
+    const script = document.createElement('script');
+    script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+    script.addEventListener('load', function () {
+        wxoLoader.init();
+    });
+    document.head.appendChild(script);
+  }, 0);                     
+</script>
+
+<script src="script.js"></script>
+
+</div>
+
+</body>
+
+</html>
