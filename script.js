@@ -189,6 +189,21 @@ waterCard.onclick = () => {
     switchSection("tools");
 };
 
+const dashboardAddWater = document.getElementById("dashboardAddWater");
+if (dashboardAddWater) {
+    dashboardAddWater.onclick = (e) => {
+        e.stopPropagation(); // Prevent navigating to Health Tools
+        currentWater = Math.round((currentWater + 0.25) * 100) / 100;
+        localStorage.setItem("water", currentWater);
+        
+        dashboardWater.innerHTML = currentWater.toFixed(2) + " L";
+        waterDisplay.innerHTML = currentWater.toFixed(2) + " L";
+        
+        updateDashboard();
+        updateHealthScore();
+    };
+}
+
 bmiCard.onclick = () => {
     switchSection("tools");
 };
@@ -1177,17 +1192,16 @@ const themeToggle = document.getElementById("themeToggle");
 if (themeToggle) {
     if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
-        themeToggle.innerHTML = '<i class="bi bi-sun"></i> Toggle Light Mode';
+        themeToggle.checked = true;
     }
 
-    themeToggle.onclick = () => {
-        document.body.classList.toggle("dark-mode");
-        if (document.body.classList.contains("dark-mode")) {
+    themeToggle.onchange = () => {
+        if (themeToggle.checked) {
+            document.body.classList.add("dark-mode");
             localStorage.setItem("theme", "dark");
-            themeToggle.innerHTML = '<i class="bi bi-sun"></i> Toggle Light Mode';
         } else {
+            document.body.classList.remove("dark-mode");
             localStorage.setItem("theme", "light");
-            themeToggle.innerHTML = '<i class="bi bi-moon"></i> Toggle Dark Mode';
         }
     };
 }
