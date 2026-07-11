@@ -278,10 +278,15 @@ Welcome back to FitFusion AI
             <h2 id="dashboardCalories">--</h2>
             <p>Daily Goal</p>
         </div>
-        <div class="card-box clickable" id="openWater">
-            <h4>💧 Water</h4>
-            <h2 id="dashboardWater">0 L</h2>
-            <p>Today's Intake</p>
+        <div class="card-box clickable d-flex flex-column justify-content-between" id="openWater" style="position: relative; min-height: 140px;">
+            <div>
+                <h4>💧 Water</h4>
+                <h2 id="dashboardWater" class="mb-0">0 L</h2>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2 w-100">
+                <span class="text-muted small">Today's Intake</span>
+                <button id="dashboardAddWater" class="btn btn-primary btn-sm py-1 px-2 text-white font-weight-bold" style="font-size: 0.75rem; border-radius: 6px; z-index: 10;">+ 250ml</button>
+            </div>
         </div>
     </div>
 
