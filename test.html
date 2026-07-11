@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IBM Test</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script>
+  window.wxOConfiguration = {
+    orchestrationID: "e5ce4a2c99f84a48960767bd3c2aacd6_c88e5d37-3b49-4d51-9180-0bbeaaccd1b6",
+    hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+    rootElementID: "root",
+    deploymentPlatform: "ibmcloud",
+    crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/e5ce4a2c99f84a48960767bd3c2aacd6:c88e5d37-3b49-4d51-9180-0bbeaaccd1b6::",
+    chatOptions: {
+        agentId: "a4e53880-a8cc-4dd4-a66a-9ebb4765fc92", 
+        agentEnvironmentId: "e1e4ebdd-6718-4f94-8076-914b2584949e",
+    }
+  };
+  setTimeout(function () {
+    const script = document.createElement('script');
+    script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+   script.onload = function () {
+    if (window.wxoLoader) {
+        wxoLoader.init();
+    } else {
+        console.error("wxoLoader did not load.");
+    }
+}; });
+    document.head.appendChild(script);
+  }, 0);                     
+</script>
+</body>
+</html>
